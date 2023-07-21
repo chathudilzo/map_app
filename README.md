@@ -21,7 +21,7 @@ geocoding is used for geocoding, i.e., converting addresses to latitude and long
 google_maps_flutter is for displaying Google Maps in the app.
 
 
-..........................................................................................................................................................................
+..........................................................................................................................................................................<br>
 class MyAppPage extends StatefulWidget {
   const MyAppPage({super.key});
 
@@ -34,7 +34,7 @@ This class defines the MyAppPage widget, which is a stateful widget. It has a si
 class _MyAppPageState extends State<MyAppPage> {
 This class represents the state for the MyAppPage widget. It extends the State class and provides the implementation for building the UI and handling the user interactions.
 
-..........................................................................................................................................................................
+..........................................................................................................................................................................<br>
 late GoogleMapController mapController;
 String? apiKey;
 final Completer<GoogleMapController> _controller = Completer();
@@ -58,7 +58,7 @@ polylineCoordinates stores the list of LatLng objects representing the polyline 
 _polylines is a set of Polyline objects to draw the polylines on the map.
 
 
-..........................................................................................................................................................................
+..........................................................................................................................................................................<br>
 @override
 void initState() {
   super.initState();
@@ -75,7 +75,7 @@ void loadApi() async {
 }
 The loadApi() method loads the environment variables defined in the .env file and retrieves the GOOGLE_MAPS_API_KEY from it.
 
-..........................................................................................................................................................................
+..........................................................................................................................................................................<br>
 Future<void> _convertAddressToLatLng(String address) async {
   try {
     List<Location> location = await locationFromAddress(address);
@@ -92,7 +92,7 @@ Future<void> _convertAddressToLatLng(String address) async {
 }
 The _convertAddressToLatLng() method takes an address as input and converts it to latitude and longitude coordinates using the geocoding package. If the location is found, it sets the _userLocation variable with the obtained coordinates and calls the getPolyPoints() method.
 
-..........................................................................................................................................................................
+..........................................................................................................................................................................<br>
 double calculateDistance(lat1, long1, lat2, long2) {
   var p = 0.017453292519943295;
   var a = 0.5 - cos((lat2 - lat1) * p) / 2 +
@@ -107,7 +107,7 @@ void _onMapCreated(GoogleMapController controller) {
 }
 This method is called when the GoogleMap widget is created, and it assigns the controller to mapController.
 
-..........................................................................................................................................................................
+..........................................................................................................................................................................<br>
 void getPolyPoints() async {
   if (mapController != null && _userLocation != null) {
     PolylinePoints polylinePoints = PolylinePoints();
@@ -143,7 +143,7 @@ void getPolyPoints() async {
 }
 The getPolyPoints() method calculates the polyline points between the destination and the user's location using the flutter_polyline_points package. It retrieves the polyline points, calculates the total distance, and updates the distance variable accordingly.
 
-..........................................................................................................................................................................
+..........................................................................................................................................................................<br>
 @override
 Widget build(BuildContext context) {
   return MaterialApp(
@@ -152,7 +152,7 @@ Widget build(BuildContext context) {
 }
 This is the build() method, which returns the MaterialApp widget, and the app's UI is built inside it.
 
-..........................................................................................................................................................................
+..........................................................................................................................................................................<br>
 body: Stack(
   children: [
     // GoogleMap widget with markers and polylines
