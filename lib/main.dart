@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:map_app/home.dart';
 import 'package:map_app/tracking_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 Future<void> main() async {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
        
         primarySwatch: Colors.blue,
       ),
-      home: const MyAppPage(),
+      home: const HomePage(),
     );
   }
 }
