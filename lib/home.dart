@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:map_app/widgets/places_box.dart';
+import 'package:map_app/widgets/weather_box.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,11 +36,11 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  PlacesBox(),
+                  PlacesBox(title: "WallPapers",wid: WeatherBox(),),
                   
-                  PlacesBox(),
-                  PlacesBox(),
-                  PlacesBox(),
+                  //PlacesBox(),
+                 // PlacesBox(),
+                  //PlacesBox(),
                 ],
               ),
             ),
@@ -76,7 +77,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
-        inactiveColor: Colors.white10,
+        inactiveColor: Color.fromARGB(230, 160, 160, 161),
         activeColor: Colors.blueAccent,
         backgroundColor: Colors.black,
         onTap: (index) {

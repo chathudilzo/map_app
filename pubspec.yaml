@@ -43,7 +43,8 @@ dependencies:
   flutter_dotenv: ^5.1.0
   geocoding: ^2.1.0
   animated_bottom_navigation_bar: ^1.2.0
-  
+  carousel_slider:
+  pixabay_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:
