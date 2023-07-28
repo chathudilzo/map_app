@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:map_app/widgets/places_box.dart';
+import 'package:map_app/widgets/wallpaper_box.dart';
 import 'package:map_app/widgets/weather_box.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,9 +37,9 @@ class _HomePageState extends State<HomePage> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
-                  PlacesBox(title: "WallPapers",wid: WeatherBox(),),
+                  PlacesBox(title: "WallPapers",wid: WallpaperBox(),),
                   
-                  //PlacesBox(),
+                  PlacesBox(title: 'Weather',wid: WeatherBox(),),
                  // PlacesBox(),
                   //PlacesBox(),
                 ],

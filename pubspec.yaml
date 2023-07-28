@@ -45,6 +45,7 @@ dependencies:
   animated_bottom_navigation_bar: ^1.2.0
   carousel_slider:
   pixabay_picker: ^1.0.7
+  flutter_spinkit: ^5.2.0
 
 dev_dependencies:
   flutter_test:
