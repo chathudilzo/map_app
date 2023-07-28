@@ -46,7 +46,9 @@ dependencies:
   carousel_slider:
   pixabay_picker: ^1.0.7
   flutter_spinkit: ^5.2.0
-
+  get:
+  loading_animation_widget: ^1.2.0+4
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

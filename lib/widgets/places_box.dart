@@ -4,10 +4,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:map_app/widgets/weather_box.dart';
 
 class PlacesBox extends StatefulWidget {
-  const PlacesBox({super.key,required this.title,required this.wid});
+  const PlacesBox({super.key,required this.title,required this.wid,required this.icon});
 
   final String title;
   final Widget wid;
+  final IconData icon;
 
   @override
   State<PlacesBox> createState() => _PlacesBoxState();
@@ -30,9 +31,20 @@ class _PlacesBoxState extends State<PlacesBox> {
           child:widget.wid,
         ),
         Positioned(
-          left: 5,
           top: 5,
-          child: Text(widget.title,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),))
+          left: 0,
+          child: Row(
+            children: [
+              Container(
+                child: Icon(widget.icon,color: Colors.orange,size: 25,),
+        ),
+        SizedBox(width: 10,),
+              Text(widget.title,style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+
+              
+            ],
+          )),
+        
         ]
       ),
     );
