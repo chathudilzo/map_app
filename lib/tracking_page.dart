@@ -13,14 +13,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
 
-class MyAppPage extends StatefulWidget {
-  const MyAppPage({super.key});
+class MapPage extends StatefulWidget {
+  const MapPage({super.key});
 
   @override
-  State<MyAppPage> createState() => _MyAppPageState();
+  State<MapPage> createState() => _MapPageState();
 }
 
-class _MyAppPageState extends State<MyAppPage> {
+class _MapPageState extends State<MapPage> {
 
 late GoogleMapController mapController;
 String? apiKey;

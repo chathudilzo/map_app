@@ -200,7 +200,7 @@ SizedBox(height: 10,),
       ),
       floatingActionButton: FloatingActionBtn(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar:BottomNavBar() ,
+      bottomNavigationBar:BottomNavBar(index: 0,) ,
     );
   }
 }

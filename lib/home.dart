@@ -118,7 +118,7 @@ final NewsController newsController=Get.put(NewsController());
       ),
       floatingActionButton: FloatingActionBtn(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar:BottomNavBar() ,
+      bottomNavigationBar:BottomNavBar(index: 0,) ,
     );
   }
 }

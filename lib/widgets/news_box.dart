@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:map_app/controllers/news_controller.dart';
+import 'package:map_app/news_page.dart';
 
 
 
@@ -108,53 +109,58 @@ class _NewsBoxState extends State<NewsBox> {
       child: CarouselSlider.builder(
         itemCount:controller.newsData.length, 
         itemBuilder:(BuildContext context,index,ind){
-          return SizedBox(
-            width: MediaQuery.of(context).size.width,
-             height: MediaQuery.of(context).size.height,
-            child: Stack(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-             height: MediaQuery.of(context).size.height,
-                  child: ClipRRect(borderRadius: BorderRadius.circular(10),
-                  child:controller. newsData[index].imageUrl!=null? 
-                  Image.network(controller. newsData[index].imageUrl.toString(),fit: BoxFit.cover,errorBuilder: (context, error, stackTrace) {
-                    return Image.asset('assets/news.jpg');
-                  },)
-                  :Image.asset('assets/news.jpg')
-                  ,),
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-
-                  bottom: 0,
-                  child: 
-                  
+          return GestureDetector(
+            onTap: () {
+                  Get.to(NewsPage(news: controller.newsData[index]));
+                },
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+               height: MediaQuery.of(context).size.height,
+              child: Stack(
+                children: [
                   Container(
-                      width: MediaQuery.of(context).size.width,
-             height: MediaQuery.of(context).size.height*0.08,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
-                        color: Color.fromARGB(255, 196, 209, 7).withOpacity(0.8)
-                      ),
-                     child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    width: MediaQuery.of(context).size.width,
+               height: MediaQuery.of(context).size.height,
+                    child: ClipRRect(borderRadius: BorderRadius.circular(10),
+                    child:controller. newsData[index].imageUrl!=null? 
+                    Image.network(controller. newsData[index].imageUrl.toString(),fit: BoxFit.cover,errorBuilder: (context, error, stackTrace) {
+                      return Image.asset('assets/news.jpg');
+                    },)
+                    :Image.asset('assets/news.jpg')
+                    ,),
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+          
+                    bottom: 0,
                     child: 
-                      SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(shorten(controller. newsData[index].description.toString()),style: TextStyle(fontSize: 10,color: Color.fromARGB(255, 0, 0, 0)),),
-                          ],
+                    
+                    Container(
+                        width: MediaQuery.of(context).size.width,
+               height: MediaQuery.of(context).size.height*0.08,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10)),
+                          color: Color.fromARGB(255, 196, 209, 7).withOpacity(0.8)
                         ),
-                      )),
-                  )
+                       child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: 
+                        SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(shorten(controller. newsData[index].description.toString()),style: TextStyle(fontSize: 10,color: Color.fromARGB(255, 0, 0, 0)),),
+                            ],
+                          ),
+                        )),
+                    )
+                    
+                    
+                    )
                   
-                  
-                  )
-                
-              ],
+                ],
+              ),
             ),
           );
         }, 

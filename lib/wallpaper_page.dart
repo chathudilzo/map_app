@@ -99,7 +99,7 @@ Future<void> _downloadImage()async{
       
         floatingActionButton: FloatingActionBtn(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar:BottomNavBar() ,     
+      bottomNavigationBar:BottomNavBar(index: 0,) ,     
                   
     );
                 
