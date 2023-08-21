@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
+import 'package:map_app/wallpaper_page.dart';
 class WallpaperBox extends StatefulWidget {
   const WallpaperBox({super.key});
 
@@ -84,14 +87,24 @@ apiUrl="https://pixabay.com/api/?key=$apiKey&q=wallpaper&image_type=photo";
 
         itemCount: wallpapers.length,
          itemBuilder: (BuildContext context,index,ind) {
-           return Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-             
-              width: MediaQuery.of(context).size.width,
-               height: MediaQuery.of(context).size.height,
-              child:ClipRRect(borderRadius: BorderRadius.circular(10),
-              child:  Image.network(wallpapers[index],fit: BoxFit.cover,),)
-              )
+           return GestureDetector(
+            onTap: () {
+              print(wallpapers[index]);
+              Get.to(()=>WallpaperPage(url:wallpapers[index]));
+            },
+             child: Container(
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+               
+                width: MediaQuery.of(context).size.width,
+                 height: MediaQuery.of(context).size.height,
+                child:ClipRRect(borderRadius: BorderRadius.circular(10),
+                child:  Image.network(wallpapers[index],fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Center(child: Text('Check Your Internet Connection',textAlign:TextAlign.center,style: TextStyle(color: Colors.white),));
+                },
+                ),)
+                ),
+           )
            ;
          }
          ,

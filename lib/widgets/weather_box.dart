@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:map_app/controllers/weather_controller.dart';
+import 'package:map_app/weather_page.dart';
 import '../classes/weather.dart';
 
 class WeatherBox extends StatelessWidget {
@@ -20,30 +21,35 @@ class WeatherBox extends StatelessWidget {
                   itemCount: weatherController.weatherData.length,
                   itemBuilder: (BuildContext context, int index, int ind) {
                     final Weather weather = weatherController.weatherData[index];
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          weather.city.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          weather.weatherIcon.toString(),
-                          style: TextStyle(fontSize: 25),
-                        ),
-                        Text(
-                          weather.temperature?.toStringAsFixed(0) ?? 'N/A',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          weather.condition.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Text(
-                          weather.message.toString(),
-                          style: TextStyle(color: Colors.white),
-                        )
-                      ],
+                    return GestureDetector(
+                      onTap: () {
+                        Get.to(()=>WeatherPage(weather: weather));
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            weather.city.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Text(
+                            weather.weatherIcon.toString(),
+                            style: TextStyle(fontSize: 25),
+                          ),
+                          Text(
+                            weather.temperature?.toStringAsFixed(0) ?? 'N/A',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Text(
+                            weather.condition.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Text(
+                            weather.message.toString(),
+                            style: TextStyle(color: Colors.white),
+                          )
+                        ],
+                      ),
                     );
                   },
                   options: CarouselOptions(

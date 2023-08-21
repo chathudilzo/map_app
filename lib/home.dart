@@ -2,11 +2,20 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:map_app/controllers/news_controller.dart';
+import 'package:map_app/controllers/weather_controller.dart';
+import 'package:map_app/weather_page.dart';
+import 'package:map_app/widgets/bottom_nav_bar.dart';
+import 'package:map_app/widgets/floating_action_button.dart';
 import 'package:map_app/widgets/news_box.dart';
+import 'package:map_app/widgets/news_list.dart';
 import 'package:map_app/widgets/places_box.dart';
 import 'package:map_app/widgets/wallpaper_box.dart';
 import 'package:map_app/widgets/weather_box.dart';
 
+import 'classes/weather.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,86 +24,101 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _bottomNavIndex=0;
+  final WeatherController weatherController = Get.put(WeatherController());
+final NewsController newsController=Get.put(NewsController());
+  
+  WeatherController Wcontroller=Get.find<WeatherController>();
+
   @override
   Widget build(BuildContext context) {
+    double height=MediaQuery.of(context).size.height;
     return Scaffold(
-    //backgroundColor: Colors.black,
-    extendBody: true,
+      extendBody: true,
       body: Container(
+        height:height,
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/plant.jpg',),fit: BoxFit.cover
+          image: DecorationImage(image: AssetImage('assets/plant.jpg'), fit: BoxFit.cover),
         ),
-
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left:8.0),
-        child: Column(
-          children: [
-            Expanded(child: Container()),
-            SizedBox(
-              width: MediaQuery.of(context).size.width ,
-              height: MediaQuery.of(context).size.width * 0.4,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  PlacesBox(title: "WallPapers",wid: WallpaperBox(),icon:Icons.image,),
-                  
-                  PlacesBox(title: 'Weather',wid: WeatherBox(),icon:Icons.cloud,),
-                  PlacesBox(title: "News",wid: NewsBox(),icon: Icons.newspaper,),
-                  //PlacesBox(),
-                ],
-              ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                 SizedBox(
+                   width: MediaQuery.of(context).size.width ,
+                   height: MediaQuery.of(context).size.height * 0.2,
+                   child:Obx((){
+                    if (Wcontroller.clwIsLoading.value) {
+                       return LoadingAnimationWidget.beat(color: Colors.blue, size: 30);
+                     } else {
+                       Weather? weather = Wcontroller.currentWeather;
+                       if (weather != null) {
+                         return GestureDetector(
+                          onTap: () {
+                            Get.to(()=>WeatherPage(weather: weather));
+                          },
+                           child: SingleChildScrollView(
+                             child: Column(
+                               mainAxisAlignment: MainAxisAlignment.center,
+                               children: [
+                                 Text(weather.city.toString(), style: TextStyle(color: Colors.white,fontSize: 28,fontWeight: FontWeight.bold)),
+                                 Text(weather.weatherIcon.toString(), style: TextStyle(fontSize: 40)),
+                                 Row(
+                                   mainAxisAlignment: MainAxisAlignment.center,
+                                   children: [
+                                     Text(weather.temperature?.toStringAsFixed(0) ?? 'N/A', style: TextStyle(color:weather.temperature!>30?Color.fromARGB(255, 228, 150, 6):weather.temperature!<20?Color.fromARGB(255, 13, 228, 228):Color.fromARGB(255, 19, 231, 26),fontSize: 30,fontWeight: FontWeight.bold)),
+                                     Text('°C',style: TextStyle(color:Colors.white,fontSize: 25))
+                                   ],
+                                 ),
+                                 Text(weather.condition.toString(), style: TextStyle(color: Colors.white)),
+                                 Text(weather.message.toString(), style: TextStyle(color: Colors.white)),
+                               ],
+                             ),
+                           ),
+                         );
+                       } else {
+                         return Text(
+                           'Weather data not available.',
+                           style: TextStyle(color: Colors.white),
+                         );
+                       }
+                     }
+                   })
+                     
+                   ),
+                 
+                 // This will take up the available space
+                SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width * 0.4,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      PlacesBox(title: "WallPapers", wid: WallpaperBox(), icon: Icons.image),
+                      PlacesBox(title: 'Weather', wid: WeatherBox(), icon: Icons.cloud),
+                      PlacesBox(title: "News", wid: NewsBox(), icon: Icons.newspaper),
+                      //PlacesBox(),
+                    ],
+                  ),
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                  Center(
+                    child: SizedBox(
+                     height: height*0.9,
+                      child:NewsList()),
+                  )
+              ],
             ),
-            SizedBox(height:MediaQuery.of(context).size.height*0.08,)
-          ],
+          ),
         ),
       ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.black,
-        onPressed: () {
-        
-      },
-      child: Container(
-  // width: MediaQuery.of(context).size.width * 0.5,
-  // height: MediaQuery.of(context).size.width * 0.5,
-  child: ClipOval(
-    child: Image(
-      image: AssetImage('assets/icon.jpg'),
-      fit: BoxFit.cover,
-    ),
-  ),
-  padding: EdgeInsets.all(2),
-  decoration: BoxDecoration(
-    boxShadow: [BoxShadow(
-      blurRadius: 3,
-      spreadRadius: 3,
-      color: Color.fromARGB(255, 10, 62, 175)
-    )],
-    border: Border.all(color: Color.fromARGB(255, 3, 10, 70), width: 4),
-    borderRadius: BorderRadius.circular(50),
-  ),
-)
-      ),
+      floatingActionButton: FloatingActionBtn(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: AnimatedBottomNavigationBar(
-        inactiveColor: Color.fromARGB(230, 160, 160, 161),
-        activeColor: Colors.blueAccent,
-        backgroundColor: Colors.black,
-        onTap: (index) {
-          setState(() {
-            _bottomNavIndex=index;
-          });
-        },
-        gapLocation: GapLocation.center,
-        notchSmoothness: NotchSmoothness.verySmoothEdge,
-        leftCornerRadius: 20,
-        rightCornerRadius: 20,
-        icons: [(Icons.home),(Icons.newspaper),(Icons.map),(Icons.apps),],
-      activeIndex: 0,),
-
-    
+      bottomNavigationBar:BottomNavBar() ,
     );
   }
 }

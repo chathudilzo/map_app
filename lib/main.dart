@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:map_app/home.dart';
@@ -20,7 +21,49 @@ class MyApp extends StatelessWidget {
        
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: Scaffold(
+        body: InternetConnectionWid(),
+      ),
     );
   }
 }
+
+class InternetConnectionWid extends StatefulWidget {
+  const InternetConnectionWid({super.key});
+
+  @override
+  State<InternetConnectionWid> createState() => _InternetConnectionWidState();
+}
+
+class _InternetConnectionWidState extends State<InternetConnectionWid> {
+  bool _isConnected=true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _checkInternetConnection();
+    Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+
+  Future<void>_checkInternetConnection()async{
+    var connectivityResult=await (Connectivity().checkConnectivity());
+    setState(() {
+      _isConnected=(connectivityResult!=ConnectivityResult.none);
+    });
+  }
+
+  void _updateConnectionStatus(ConnectivityResult result){
+    setState(() {
+      _isConnected=(result!=ConnectivityResult.none);
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return _isConnected?HomePage():HomePage();
+  }
+}
+
+
+//Center(child: Text('Check Your Internet Connection'))

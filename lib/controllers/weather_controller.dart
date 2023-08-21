@@ -1,8 +1,8 @@
 import 'dart:convert';
-
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
-
+import 'package:location/location.dart';
+import 'package:map_app/classes/weather_tsimple.dart';
 import '../classes/district.dart';
 import '../classes/weather.dart';
 import 'package:http/http.dart' as http;
@@ -38,19 +38,87 @@ String _apiKey='';
 String _apiUrl="";
 
 bool isLoading=true;
+RxBool clwIsLoading=true.obs;
+RxBool sortedWIsLoading=true.obs;
 
+Rx<Weather?>_currentWeather=Rx<Weather?>(null);
+
+Weather? get currentWeather=>_currentWeather.value;
 
 RxList<Weather> weatherData=RxList<Weather>();
+RxList<SortedWeather> sortedWeatherData=RxList<SortedWeather>();
 
 @override
   void onInit() {
     // TODO: implement onInit
     super.onInit();
     getWeather();
+    _getCurrentLocationWeather();
   }
 
 
-  void getWeather() async {
+
+
+
+
+
+
+
+Future<void>_getCurrentLocationWeather()async{
+  try{
+    LocationData locationData=await Location().getLocation();
+    print(locationData);
+    await dotenv.load();
+    _apiKey = dotenv.env['WEATHER_API'].toString();
+    final double? lat=locationData.latitude;
+    final double? lon=locationData.longitude;
+    _apiUrl='https://api.openweathermap.org/data/2.5/weather?lat=${lat.toString()}&lon=${lon.toString()}&appid=${_apiKey}';
+     final response = await http.get(Uri.parse(_apiUrl));
+     print(response.body);
+        if (response.statusCode == 200) {
+          final data = json.decode(response.body);
+
+          final temp = data['main']['temp'];
+          final String message = getMessage(temp - 273.15);
+          final String icon = getIcon(data['weather'][0]['main']);
+
+          final Weather weather = Weather(
+            lat: lat,
+            long: lon,
+            city: data['name'],
+            temperature: temp - 273.15,
+            feelsLike: (data['main']['feels_like'])-273.15,
+            maxTemp: (data['main']['temp_max'])-273.15,
+            minTemp: (data['main']['temp_min'])-273.15,
+            //windSpeed: data['wind']['speed'],
+            windDeg: data['wind']['deg'],
+
+            condition: data['weather'][0]['main'],
+            humidity: data['main']['humidity'],
+            country: data['sys']['country'],
+            weatherIcon: icon,
+            message: message,
+          );
+          _currentWeather.value=weather;
+          if(_currentWeather.value!=null){
+          print(_currentWeather.value?.city);
+            clwIsLoading.value=false;
+        }
+
+        }
+        
+        
+      
+    } catch (e) {
+      print(e.toString());
+    } finally {
+      
+      update(); // Notify listeners that the data has been updated
+    }
+
+}
+
+  Future<void> getWeather() async {
     await dotenv.load();
     _apiKey = dotenv.env['WEATHER_API'].toString();
 
@@ -70,8 +138,16 @@ RxList<Weather> weatherData=RxList<Weather>();
           final String icon = getIcon(data['weather'][0]['main']);
 
           final Weather weather = Weather(
+            lat: lat,
+            long: lon,
             city: data['name'],
             temperature: temp - 273.15,
+            feelsLike: (data['main']['feels_like'])-273.15,
+            maxTemp: (data['main']['temp_max'])-273.15,
+            minTemp: (data['main']['temp_min'])-273.15,
+           // windSpeed: data['wind']['speed'],
+           windDeg: data['wind']['deg'],
+
             condition: data['weather'][0]['main'],
             humidity: data['main']['humidity'],
             country: data['sys']['country'],
@@ -81,13 +157,71 @@ RxList<Weather> weatherData=RxList<Weather>();
           weatherData.add(weather);
         }
       }
+      if(weatherData.length>0){
+        isLoading=false;
+      }
     } catch (e) {
       print(e.toString());
     } finally {
-      isLoading = false;
+      
       update(); // Notify listeners that the data has been updated
     }
   }
+
+Future<void> getSortedWeather(double lat,double lon)async{
+  sortedWIsLoading.value=true;
+
+
+
+// lat=6.0170;
+// lon=79.9350;
+
+  await dotenv.load();
+  _apiKey=dotenv.env['WEATHER_API'].toString();
+
+  try{
+    final _apiUrl='https://api.openweathermap.org/data/2.5/forecast?lat=${lat.toString()}&lon=${lon.toString()}&appid=$_apiKey';
+    final response=await http.get(Uri.parse(_apiUrl));
+
+    print(_apiUrl);
+print(response.body);
+    if(response.statusCode==200){
+      final jsonData=json.decode(response.body);
+      final List<SortedWeather> weatherList=[];
+
+      for(var data in jsonData['list']){
+        final DateTime dateTime=DateTime.fromMillisecondsSinceEpoch(data['dt']*1000);
+        final double temp=(data['main']['temp'])-273.15;
+        //print(data['weather'][0]['main']);
+        final String icon=getIcon(data['weather'][0]['main']);
+
+        weatherList.add(SortedWeather(dateTime: dateTime, temp: temp,
+        
+        icon:icon
+        
+        ));
+
+      }
+
+      if(weatherList.isNotEmpty){
+        sortedWeatherData.value=weatherList;
+        for(int i=0;i<sortedWeatherData.length;i++){
+          print(sortedWeatherData[i].dateTime);
+          print(sortedWeatherData[i].temp);
+          print(sortedWeatherData[i].icon);
+        }
+        sortedWIsLoading.value=false;
+      }
+    }
+  }catch(error){
+    print(error);
+  }
+}
+
+
+
+
+
 
   String getIcon(String condition) {
   if (condition.contains('Thunderstorm')) {
