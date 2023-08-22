@@ -9,6 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:map_app/wallpaper_page.dart';
 class WallpaperBox extends StatefulWidget {
   const WallpaperBox({super.key});
@@ -82,7 +83,7 @@ apiUrl="https://pixabay.com/api/?key=$apiKey&q=wallpaper&image_type=photo";
   @override
   Widget build(BuildContext context) {
     return Container(
-      child:_isLoading?CircularProgressIndicator():
+      child:_isLoading?LoadingAnimationWidget.beat(color: Colors.blue,size: 30):
        CarouselSlider.builder(
 
         itemCount: wallpapers.length,

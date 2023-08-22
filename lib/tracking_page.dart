@@ -6,6 +6,8 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:map_app/widgets/bottom_nav_bar.dart';
+import 'package:map_app/widgets/floating_action_button.dart';
 ///import 'package:location/location.dart';
 
 
@@ -22,26 +24,29 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
 
-late GoogleMapController mapController;
-String? apiKey;
-final Completer<GoogleMapController> _controller = Completer();
 
-  final LatLng _destination = const LatLng(6.1667, 80.7500);
+String? apiKey;
+
+late GoogleMapController mapController;
+
+LatLng _destination = const LatLng(6.1667, 80.7500);
 
    LatLng? _userLocation;
 
   double distance=0;
+  TextEditingController _destinationAddressController=TextEditingController();
+
 TextEditingController _userLocationController=TextEditingController();
 
  List<LatLng> polylineCoordinates=[];
 
  Set<Polyline> _polylines={};
 
- // LocationData? currentLocation;
+ //LocationData? currentLocation;
 
 @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     loadApi();
     //getCurrentLocation();
@@ -50,24 +55,42 @@ TextEditingController _userLocationController=TextEditingController();
 void loadApi()async{
    await dotenv.load();
     apiKey = dotenv.env['GOOGLE_MAPS_API_KEY'].toString();
-    print("apikey"+apiKey.toString());
+    
 }
 
 
 
 
-Future<void> _convertAddressToLatLng(String address)async{
+Future<void> _convertAddressToLatLng(List<Map<String,String>> addresses)async{
   try{
-    List<Location> location=await locationFromAddress(address);
+    
+    addresses.forEach((mapAddress) async {
+      String? address=mapAddress['address'];
+      String? type=mapAddress['type'];
 
+        List<Location> location=await locationFromAddress(address!);
+    
     if(location.isNotEmpty){
       setState(() {
-        _userLocation=LatLng(location.first.latitude, location.first.longitude);
+        if(type=='user'){
+          _userLocation=LatLng(location.first.latitude, location.first.longitude);
+           print(_userLocation);
+          print(_destination);
+        }else{
+           print(_userLocation);
+          print(_destination);
+          _destination=LatLng(location.first.latitude, location.first.longitude);
+        }
 
       });
-      getPolyPoints();
 
-    }
+    }});
+
+
+
+    getPolyPoints();
+
+    
   }catch(e){
     print(e.toString());
   }
@@ -109,14 +132,16 @@ Future<void> _convertAddressToLatLng(String address)async{
 
 
   void getPolyPoints()async{
+     print(distance);
    if(mapController!=null&& _userLocation!=null){
      PolylinePoints polylinePoints=PolylinePoints();
      polylineCoordinates.clear();
 
     loadApi();
     PolylineResult result=await polylinePoints.getRouteBetweenCoordinates(apiKey.toString(), PointLatLng(_destination.latitude, _destination.longitude), PointLatLng(_userLocation!.latitude, _userLocation!.longitude));
-
+    print(result.points);
     if(result.points.isNotEmpty){
+      print(result.points);
       result.points.forEach(
         (PointLatLng point)=>polylineCoordinates.add(
           LatLng(point.latitude, point.longitude)
@@ -132,7 +157,7 @@ Future<void> _convertAddressToLatLng(String address)async{
        }
       setState(() {
        distance=totalDistance;
-
+        print(distance);
       });
     }
    }
@@ -142,16 +167,10 @@ Future<void> _convertAddressToLatLng(String address)async{
   
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.green[700],
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Maps Sample App'),
-          elevation: 2,
-        ),
+    double width=MediaQuery.of(context).size.width;
+    double height=MediaQuery.of(context).size.height;
+    return  Scaffold(
+        extendBody: true,
         body: Stack(
   children: [
     GoogleMap(
@@ -168,14 +187,34 @@ Future<void> _convertAddressToLatLng(String address)async{
         Polyline(
           polylineId: const PolylineId("route"),
           points: polylineCoordinates,
-          color: Colors.red,
+          color: Color.fromARGB(255, 54, 73, 244),
           width: 6,
         ),
       },
     ),
     Positioned(
       bottom: 200,
-      left: 50,
+      right: 20,
+      child:ClipOval(
+  child: Material(
+    color: Colors.orange.shade100, // button color
+    child: InkWell(
+      splashColor: Colors.orange, // inkwell color
+      child: SizedBox(
+        width: 56,
+        height: 56,
+        child: Icon(Icons.my_location),
+      ),
+      onTap: () {
+        // TODO: Add the operation to be performed
+        // on button tap
+      },
+    ),
+  ),
+), ),
+    Positioned(
+      bottom: 100,
+      left: 20,
       child: Container(
         child: Card(
           child: Container(
@@ -189,32 +228,150 @@ Future<void> _convertAddressToLatLng(String address)async{
       ),
     ),
     Positioned(
-            top: 16,
+            top: 40,
             left: 16,
             right: 16,
             child: Card(
               child: Container(
                 padding: const EdgeInsets.all(10),
                 child: TextField(
+                  
                   controller: _userLocationController,
                   decoration: InputDecoration(
+                    prefixText: '1 ',
                     hintText: 'Enter a location',
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.search),
-                      onPressed: () {
-                        String address = _userLocationController.text;
-                        _convertAddressToLatLng(address);
-                      },
-                    ),
+                    suffixIcon: Icon(Icons.location_on)
                   ),
                 ),
               ),
             ),
-    )
-  ],
-),
+    ),
+    Positioned(
+            top: 120,
+            left: 16,
+            right: 16,
+            child: Card(
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: _destinationAddressController,
+                  decoration: InputDecoration(
+                    prefixText: '2 ',
+                    hintText: 'Enter a location',
+                    suffixIcon: Icon(Icons.location_city_rounded),
+                  ),
+                ),
+              ),
+            ),
+    ),
+    Positioned(
+      top: 210,
+      left: 100,
+      right: 100,
+      child: GestureDetector(
+        onTap: () {
+          String address = _destinationAddressController.text;
+      String address1 = _userLocationController.text;
 
-      ),
-    );
+      if(address.isNotEmpty && address1.isNotEmpty){
+        List<Map<String,String>> addresses=[];
+      addresses.add({'address':address,'type':'user'});
+      addresses.add({'address':address1,'type':'destination'});
+                 _convertAddressToLatLng(addresses);
+      }
+      
+
+        },
+        child: Container(
+        width:width*0.2 ,
+        height: 50,
+        decoration: BoxDecoration(
+          boxShadow: [BoxShadow(blurRadius: 3,spreadRadius: 2,offset: Offset(1,2))],
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.orange
+        ),
+        child: Center(child: Text('Show Route',style: TextStyle(fontWeight: FontWeight.bold),),),
+          ),
+      ))
+  ],
+),floatingActionButton: FloatingActionBtn(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar:BottomNavBar(index: 2,) );
   }
 }
+
+   
+
+
+
+//import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/src/widgets/container.dart';
+// import 'package:flutter/src/widgets/framework.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+// class MapPage extends StatefulWidget {
+//   const MapPage({super.key});
+
+//   @override
+//   State<MapPage> createState() => _MapPageState();
+// }
+
+// class _MapPageState extends State<MapPage> {
+
+// CameraPosition _initialLocation=CameraPosition(target: LatLng(0.0,0.0),zoom: 11);
+
+// late GoogleMapController mapController;
+
+
+
+
+//   @override
+//   Widget build(BuildContext context) {
+//     double width=MediaQuery.of(context).size.width;
+//     double height=MediaQuery.of(context).size.height;
+
+//     return Scaffold(
+//       body: Container(
+//         height: height,
+//         width: width,
+//         child: Stack(
+//           children: [
+//             GoogleMap(
+//             initialCameraPosition: _initialLocation,
+            
+//             myLocationEnabled: true,
+//             myLocationButtonEnabled: false,
+//             mapType: MapType.normal,
+//             zoomGesturesEnabled: true,
+//             zoomControlsEnabled: false,
+//             onMapCreated: (GoogleMapController controller) {
+//               mapController = controller;
+//             },
+//             ),
+//             Positioned(
+//               bottom: 50,
+//               right: 20,
+//               child: ClipOval(
+//               child: Material(
+//                 color: Colors.orange.shade100, // button color
+//                 child: InkWell(
+//                   splashColor: Colors.orange, // inkwell color
+//                   child: SizedBox(
+//                     width: 56,
+//                     height: 56,
+//                     child: Icon(Icons.my_location),
+//                   ),
+//                   onTap: () {
+//                     // TODO: Add the operation to be performed
+//                     // on button tap
+//                   },
+//                 ),
+//               ),
+//             ),)
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
