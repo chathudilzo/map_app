@@ -2,6 +2,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:map_app/home.dart';
+import 'package:map_app/splash_screen.dart';
 import 'package:map_app/tracking_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 Future<void> main() async {
@@ -61,7 +62,7 @@ class _InternetConnectionWidState extends State<InternetConnectionWid> {
   }
   @override
   Widget build(BuildContext context) {
-    return _isConnected?HomePage():HomePage();
+    return _isConnected?SpashScreen():SpashScreen();
   }
 }
 

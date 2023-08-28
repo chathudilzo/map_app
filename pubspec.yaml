@@ -51,7 +51,8 @@ dependencies:
   connectivity:
   image_downloader:
   intl:
-  
+  animated_splash_screen: ^1.3.0
+  google_fonts:
 
 dev_dependencies:
   flutter_test:

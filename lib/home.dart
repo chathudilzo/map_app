@@ -12,6 +12,7 @@ import 'package:map_app/widgets/floating_action_button.dart';
 import 'package:map_app/widgets/news_box.dart';
 import 'package:map_app/widgets/news_list.dart';
 import 'package:map_app/widgets/places_box.dart';
+import 'package:map_app/widgets/unit_box.dart';
 import 'package:map_app/widgets/wallpaper_box.dart';
 import 'package:map_app/widgets/weather_box.dart';
 
@@ -101,7 +102,7 @@ final NewsController newsController=Get.put(NewsController());
                       PlacesBox(title: "WallPapers", wid: WallpaperBox(), icon: Icons.image),
                       PlacesBox(title: 'Weather', wid: WeatherBox(), icon: Icons.cloud),
                       PlacesBox(title: "News", wid: NewsBox(), icon: Icons.newspaper),
-                      //PlacesBox(),
+                      PlacesBox(title: 'Units',wid: UnitBox(),icon: Icons.ac_unit,),
                     ],
                   ),
                 ),

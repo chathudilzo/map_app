@@ -1,0 +1,391 @@
+[
+    {
+      "name": "Length",
+      "units":[
+        {
+          "name": "Meter",
+          "convertibleTypes": ["Kilometer", "Mile", "Inch", "Foot", "Centimeter"],
+          "conversionFormulas": {
+            "Kilometer": "value * 0.001",
+            "Mile": "value * 0.000621371",
+            "Inch": "value * 39.3701",
+            "Foot": "value * 3.28084",
+            "Centimeter": "value * 100"
+          }
+        },
+        {
+          "name": "Kilometer",
+          "convertibleTypes": ["Meter", "Mile", "Inch", "Foot", "Centimeter"],
+          "conversionFormulas": {
+            "Meter": "value * 1000",
+            "Mile": "value * 0.621371",
+            "Inch": "value * 39370.1",
+            "Foot": "value * 3280.84",
+            "Centimeter": "value * 100000"
+          }
+        },
+        {
+          "name": "Mile",
+          "convertibleTypes": ["Meter", "Kilometer", "Inch", "Foot", "Centimeter"],
+          "conversionFormulas": {
+            "Meter": "value * 1609.34",
+            "Kilometer": "value * 1.60934",
+            "Inch": "value * 63360",
+            "Foot": "value * 5280",
+            "Centimeter": "value * 160934"
+          }
+        },
+        {
+          "name": "Inch",
+          "convertibleTypes": ["Meter", "Kilometer", "Mile", "Foot", "Centimeter"],
+          "conversionFormulas": {
+            "Meter": "value * 0.0254",
+            "Kilometer": "value * 2.54e-5",
+            "Mile": "value * 1.5783e-5",
+            "Foot": "value * 0.0833333",
+            "Centimeter": "value * 2.54"
+          }
+        },
+        {
+          "name": "Foot",
+          "convertibleTypes": ["Meter", "Kilometer", "Mile", "Inch", "Centimeter"],
+          "conversionFormulas": {
+            "Meter": "value * 0.3048",
+            "Kilometer": "value * 0.0003048",
+            "Mile": "value * 0.000189394",
+            "Inch": "value * 12",
+            "Centimeter": "value * 30.48"
+          }
+        },
+        {
+          "name": "Centimeter",
+          "convertibleTypes": ["Meter", "Kilometer", "Mile", "Inch", "Foot"],
+          "conversionFormulas": {
+            "Meter": "value * 0.01",
+            "Kilometer": "value * 1e-5",
+            "Mile": "value * 6.2137e-6",
+            "Inch": "value * 0.393701",
+            "Foot": "value * 0.0328084"
+          }
+        }
+      ]
+      
+    },
+    {
+      "name": "Mass",
+      "units": [
+        {
+          "name": "Kilogram",
+          "convertibleTypes": ["Gram", "Pound", "Ounce"],
+          "conversionFormulas": {
+            "Gram": "value * 1000",
+            "Pound": "value * 2.20462",
+            "Ounce": "value * 35.274"
+          }
+        },
+        {
+          "name": "Gram",
+          "convertibleTypes": ["Kilogram", "Pound", "Ounce"],
+          "conversionFormulas": {
+            "Kilogram": "value * 0.001",
+            "Pound": "value * 0.00220462",
+            "Ounce": "value * 0.035274"
+          }
+        },
+        {
+          "name": "Pound",
+          "convertibleTypes": ["Kilogram", "Gram", "Ounce"],
+          "conversionFormulas": {
+            "Kilogram": "value * 0.453592",
+            "Gram": "value * 453.592",
+            "Ounce": "value * 16"
+          }
+        },
+        {
+          "name": "Ounce",
+          "convertibleTypes": ["Kilogram", "Gram", "Pound"],
+          "conversionFormulas": {
+            "Kilogram": "value * 0.0283495",
+            "Gram": "value * 28.3495",
+            "Pound": "value * 0.0625"
+          }
+        }
+      ]
+      
+    },
+    {
+      "name": "Temperature",
+      "units":[
+        {
+          "name": "Celsius",
+          "convertibleTypes": ["Fahrenheit", "Kelvin"],
+          "conversionFormulas": {
+            "Fahrenheit": "(value * 9/5) + 32",
+            "Kelvin": "value + 273.15"
+          }
+        },
+        {
+          "name": "Fahrenheit",
+          "convertibleTypes": ["Celsius", "Kelvin"],
+          "conversionFormulas": {
+            "Celsius": "(value - 32) * 5/9",
+            "Kelvin": "(value - 32) * 5/9 + 273.15"
+          }
+        },
+        {
+          "name": "Kelvin",
+          "convertibleTypes": ["Celsius", "Fahrenheit"],
+          "conversionFormulas": {
+            "Celsius": "value - 273.15",
+            "Fahrenheit": "(value - 273.15) * 9/5 + 32"
+          }
+        }
+      ]
+      
+    },
+    {
+      "name": "Volume",
+      "units": [
+        {
+          "name": "Liter",
+          "convertibleTypes": ["Milliliter", "Gallon", "Cubic Meter", "Cubic Inch"],
+          "conversionFormulas": {
+            "Milliliter": "value * 1000",
+            "Gallon": "value * 0.264172",
+            "Cubic Meter": "value * 0.001",
+            "Cubic Inch": "value * 61.0237"
+          }
+        },
+        {
+          "name": "Milliliter",
+          "convertibleTypes": ["Liter", "Gallon", "Cubic Meter", "Cubic Inch"],
+          "conversionFormulas": {
+            "Liter": "value * 0.001",
+            "Gallon": "value * 0.000264172",
+            "Cubic Meter": "value * 1e-6",
+            "Cubic Inch": "value * 0.0610237"
+          }
+        },
+        {
+          "name": "Gallon",
+          "convertibleTypes": ["Liter", "Milliliter", "Cubic Meter", "Cubic Inch"],
+          "conversionFormulas": {
+            "Liter": "value * 3.78541",
+            "Milliliter": "value * 3785.41",
+            "Cubic Meter": "value * 0.00378541",
+            "Cubic Inch": "value * 231"
+          }
+        },
+        {
+          "name": "Cubic Meter",
+          "convertibleTypes": ["Liter", "Milliliter", "Gallon", "Cubic Inch"],
+          "conversionFormulas": {
+            "Liter": "value * 1000",
+            "Milliliter": "value * 1e+6",
+            "Gallon": "value * 264.172",
+            "Cubic Inch": "value * 61023.7"
+          }
+        },
+        {
+          "name": "Cubic Inch",
+          "convertibleTypes": ["Liter", "Milliliter", "Gallon", "Cubic Meter"],
+          "conversionFormulas": {
+            "Liter": "value * 0.0163871",
+            "Milliliter": "value * 16.3871",
+            "Gallon": "value * 0.004329",
+            "Cubic Meter": "value * 1.63871e-5"
+          }
+        }
+      ]
+      
+    },
+    {
+      "name": "Time",
+      "units":[
+        {
+          "name": "Second",
+          "convertibleTypes": ["Minute", "Hour", "Day"],
+          "conversionFormulas": {
+            "Minute": "value * 0.0166667",
+            "Hour": "value * 0.000277778",
+            "Day": "value * 1.15741e-5"
+          }
+        },
+        {
+          "name": "Minute",
+          "convertibleTypes": ["Second", "Hour", "Day"],
+          "conversionFormulas": {
+            "Second": "value * 60",
+            "Hour": "value * 0.0166667",
+            "Day": "value * 6.94444e-4"
+          }
+        },
+        {
+          "name": "Hour",
+          "convertibleTypes": ["Second", "Minute", "Day"],
+          "conversionFormulas": {
+            "Second": "value * 3600",
+            "Minute": "value * 60",
+            "Day": "value * 0.0416667"
+          }
+        },
+        {
+          "name": "Day",
+          "convertibleTypes": ["Second", "Minute", "Hour"],
+          "conversionFormulas": {
+            "Second": "value * 86400",
+            "Minute": "value * 1440",
+            "Hour": "value * 24"
+          }
+        }
+      ]
+      
+    },
+    {
+      "name": "Speed",
+      "units":[
+        {
+          "name": "Meters per Second",
+          "convertibleTypes": ["Kilometers per Hour", "Miles per Hour"],
+          "conversionFormulas": {
+            "Kilometers per Hour": "value * 3.6",
+            "Miles per Hour": "value * 2.23694"
+          }
+        },
+        {
+          "name": "Kilometers per Hour",
+          "convertibleTypes": ["Meters per Second", "Miles per Hour"],
+          "conversionFormulas": {
+            "Meters per Second": "value * 0.277778",
+            "Miles per Hour": "value * 0.621371"
+          }
+        },
+        {
+          "name": "Miles per Hour",
+          "convertibleTypes": ["Meters per Second", "Kilometers per Hour"],
+          "conversionFormulas": {
+            "Meters per Second": "value * 0.44704",
+            "Kilometers per Hour": "value * 1.60934"
+          }
+        }
+      ]
+      
+    },
+    {
+      "name": "Area",
+      "units": [
+        {
+          "name": "Square Kilometer",
+          "convertibleTypes": ["Square Meter", "Square Mile", "Square Inch", "Square Foot"],
+          "conversionFormulas": {
+            "Square Meter": "value * 1e+6",
+            "Square Mile": "value * 0.386102",
+            "Square Inch": "value * 1550003.1",
+            "Square Foot": "value * 107639.104"
+          }
+        },
+        {
+          "name": "Square Mile",
+          "convertibleTypes": ["Square Meter", "Square Kilometer", "Square Inch", "Square Foot"],
+          "conversionFormulas": {
+            "Square Meter": "value * 2.58999e+6",
+            "Square Kilometer": "value * 2.58999",
+            "Square Inch": "value * 4014489600",
+            "Square Foot": "value * 27878400"
+          }
+        },
+        {
+          "name": "Square Inch",
+          "convertibleTypes": ["Square Meter", "Square Kilometer", "Square Mile", "Square Foot"],
+          "conversionFormulas": {
+            "Square Meter": "value * 0.00064516",
+            "Square Kilometer": "value * 6.4516e-10",
+            "Square Mile": "value * 2.49098e-7",
+            "Square Foot": "value * 0.00694444"
+          }
+        },
+        {
+          "name": "Square Foot",
+          "convertibleTypes": ["Square Meter", "Square Kilometer", "Square Mile", "Square Inch"],
+          "conversionFormulas": {
+            "Square Meter": "value * 0.092903",
+            "Square Kilometer": "value * 9.2903e-8",
+            "Square Mile": "value * 3.58701e-8",
+            "Square Inch": "value * 144"
+          }
+        }
+      ]
+      
+    },
+    {
+      "name": "Pressure",
+      "units": [
+        {
+          "name": "Bar",
+          "convertibleTypes": ["Pascal", "Atmosphere", "Pound per Square Inch"],
+          "conversionFormulas": {
+            "Pascal": "value * 100000",
+            "Atmosphere": "value * 0.986923",
+            "Pound per Square Inch": "value * 14.5038"
+          }
+        },
+        {
+          "name": "Atmosphere",
+          "convertibleTypes": ["Pascal", "Bar", "Pound per Square Inch"],
+          "conversionFormulas": {
+            "Pascal": "value * 101325",
+            "Bar": "value * 1.01325",
+            "Pound per Square Inch": "value * 14.6959"
+          }
+        },
+        {
+          "name": "Pound per Square Inch",
+          "convertibleTypes": ["Pascal", "Bar", "Atmosphere"],
+          "conversionFormulas": {
+            "Pascal": "value * 6894.76",
+            "Bar": "value * 0.0689476",
+            "Atmosphere": "value * 0.068046"
+          }
+        }
+      ]
+      
+    },
+    {
+      "name": "Energy",
+      "units": [
+        {
+          "name": "Calorie",
+          "convertibleTypes": ["Joule", "Kilowatt-hour"],
+          "conversionFormulas": {
+            "Joule": "value * 4.184",
+            "Kilowatt-hour": "value * 0.00000116222"
+          }
+        },
+        {
+          "name": "Kilowatt-hour",
+          "convertibleTypes": ["Joule", "Calorie"],
+          "conversionFormulas": {
+            "Joule": "value * 3600000",
+            "Calorie": "value * 860420.65"
+          }
+        }
+      ]
+      
+    },
+    {
+      "name": "Currency",
+      "units": [
+        {
+          "name": "USD",
+          "convertibleTypes": ["EUR", "JPY", "GBP"],
+          "conversionFormulas": {
+            "EUR": "value * 0.85",   
+            "JPY": "value * 110.34", 
+            "GBP": "value * 0.73"   
+          }
+        }
+      ]
+      
+    }
+  ]
+  
