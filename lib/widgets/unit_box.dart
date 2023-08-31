@@ -3,6 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+
+import '../unit_converter_page.dart';
 
 class UnitBox extends StatefulWidget {
   const UnitBox({super.key});
@@ -52,66 +55,71 @@ List<List<String>> unitPairs=[
     double width=MediaQuery.of(context).size.width;
     double height=MediaQuery.of(context).size.height;
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        gradient: LinearGradient(colors: [Color.fromARGB(255, 241, 86, 14),Colors.black])
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 10,),
-            Container(
-            
-              //padding:EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                boxShadow: [BoxShadow(blurRadius: 2,spreadRadius: 3,color: Colors.black,offset: Offset(1,1))],
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromARGB(255, 57, 58, 57)
-              ),
-              child:CarouselSlider.builder(itemCount: unitPairs.length, 
-              itemBuilder: (context, index, realIndex) {
-                return Center(child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-              width: 110,
-              height: 25,
-              decoration: BoxDecoration(
-                boxShadow: [BoxShadow(blurRadius: 2,spreadRadius: 3,color: Colors.black,offset: Offset(1,1))],
-                borderRadius: BorderRadius.circular(10),
-                color: Color.fromARGB(255, 243, 145, 33)
-              ),
-              child: Center(child: Text(unitPairs[index][0],style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),))),
-                    
-                    Text('To',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
-            Container(
-              width: 110,
-              height: 25,
-              decoration: BoxDecoration(
-                boxShadow: [BoxShadow(blurRadius: 2,spreadRadius: 3,color: Colors.black,offset: Offset(1,1))],
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.blue
-              ),
-              child: Center(child: Text(unitPairs[index][1],style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),)))
-                  ],
-                ));
-              },
+    return GestureDetector(
+      onTap: () {
+        Get.to(()=>UnitConverterPage());
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          gradient: LinearGradient(colors: [Color.fromARGB(255, 241, 86, 14),Colors.black])
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 10,),
+              Container(
               
-               options: CarouselOptions(
-                height: 90,
-                autoPlay: true,
-               autoPlayInterval: Duration(seconds: 8),
-               scrollDirection: Axis.vertical,
-               viewportFraction: 1,
-               autoPlayAnimationDuration: Duration(seconds: 1)),
-               
-               )
-              ),
-            
-          ],
+                //padding:EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  boxShadow: [BoxShadow(blurRadius: 2,spreadRadius: 3,color: Colors.black,offset: Offset(1,1))],
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color.fromARGB(255, 57, 58, 57)
+                ),
+                child:CarouselSlider.builder(itemCount: unitPairs.length, 
+                itemBuilder: (context, index, realIndex) {
+                  return Center(child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                width: 110,
+                height: 25,
+                decoration: BoxDecoration(
+                  boxShadow: [BoxShadow(blurRadius: 2,spreadRadius: 3,color: Colors.black,offset: Offset(1,1))],
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color.fromARGB(255, 243, 145, 33)
+                ),
+                child: Center(child: Text(unitPairs[index][0],style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),))),
+                      
+                      Text('To',style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),),
+              Container(
+                width: 110,
+                height: 25,
+                decoration: BoxDecoration(
+                  boxShadow: [BoxShadow(blurRadius: 2,spreadRadius: 3,color: Colors.black,offset: Offset(1,1))],
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.blue
+                ),
+                child: Center(child: Text(unitPairs[index][1],style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.bold),)))
+                    ],
+                  ));
+                },
+                
+                 options: CarouselOptions(
+                  height: 90,
+                  autoPlay: true,
+                 autoPlayInterval: Duration(seconds: 8),
+                 scrollDirection: Axis.vertical,
+                 viewportFraction: 1,
+                 autoPlayAnimationDuration: Duration(seconds: 1)),
+                 
+                 )
+                ),
+              
+            ],
+          ),
         ),
       ),
     );
