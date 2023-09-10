@@ -62,7 +62,7 @@ List<List<String>> unitPairs=[
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          gradient: LinearGradient(colors: [Color.fromARGB(255, 241, 86, 14),Colors.black])
+          gradient: LinearGradient(colors: [Color.fromARGB(255, 241, 86, 14),Color.fromARGB(255, 9, 122, 250)])
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -76,7 +76,7 @@ List<List<String>> unitPairs=[
                 decoration: BoxDecoration(
                   boxShadow: [BoxShadow(blurRadius: 2,spreadRadius: 3,color: Colors.black,offset: Offset(1,1))],
                   borderRadius: BorderRadius.circular(10),
-                  color: Color.fromARGB(255, 57, 58, 57)
+                  gradient:LinearGradient(colors: [Color.fromARGB(255, 12, 10, 139),Colors.blue]) 
                 ),
                 child:CarouselSlider.builder(itemCount: unitPairs.length, 
                 itemBuilder: (context, index, realIndex) {

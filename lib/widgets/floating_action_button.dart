@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
+import 'package:map_app/bot.dart';
 
 class FloatingActionBtn extends StatefulWidget {
   const FloatingActionBtn({super.key});
@@ -16,7 +18,9 @@ class _FloatingActionBtnState extends State<FloatingActionBtn> {
   Widget build(BuildContext context) {
     return FloatingActionButton(
         backgroundColor: Colors.black,
-        onPressed: () {},
+        onPressed: () {
+          Get.to(()=>ChatScreen());
+        },
         child: Container(
           // width: MediaQuery.of(context).size.width * 0.5,
           // height: MediaQuery.of(context).size.width * 0.5,

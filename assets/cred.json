@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "mapappandroid-393509",
+  "private_key_id": "6db2665760f3af66340e5ca495a1f269f5eff954",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC5YpbWItBrtGlU\nGprvWH5RbedNH5PtbEgSMwetOCKHJuyxfRiy/8JWKF4hhRn4emGTPf4sIMQcEVoX\n6vDE9kVkIcPXlEPhSw5yq9mEkgHWql7CtydM8PHNfM6Pxg/xAADG5GCA7aTufbmm\nfNoOaN6uSwx0LX4aG0rbghMeWBEXL4O26q6Ng88liUNHPW548VLkyZ/v3xLEYtTu\n1LD62hl+M1Mxu28B+TrgQ20HHvjEN3xySt8m4QVANOUzrE295OJDKnMCpNUj1M9F\nGHpDx/ufvq6VKd1gi1r+e0tVUue5dEI/oFpXO55tjqEa6HlnKc5y4TwISqpV4vaS\n32Na9179AgMBAAECggEAAx6BrO0jTZpv5rRRh61TLVEc8Jd8G19UcXghJynq8nFK\niZf37DFFXGVLwT/9p9QJIOQj/1nN90WovdBfHJ2i4yowRd9BtmY0TeRC9ioFGokg\nfX6sDEqARNicVPDcaPxvKdJDD2m71y8+FdPmObWRuq+mHsRMRtJySAlO1PONYhAM\nJXAKSw6N8yOcssq/IYQ/ukzmE3UPD0uRVVeqJk01R8ct2iSaAgHozdDVIJcYlgwo\nHT0ZFr1AE3+6a39UeMCcq7Ah7pox5hJeI3p5Nk0cQT9ubKp+tb1cMuhMogqsVfKY\nU+wRUgdYHKSeF1YTBAQmUPy7TQGTHBR/1PClAf+3/wKBgQD7pej9iKCEmSCBIKBq\nS8RO+YKYAJr3Su8RIMnA3dFVpd7asRz+uKPSJa/hBS2eMZFaWYAB5x2RSorGOFxW\nXAtzUa8GaUYwfzxfMsQyljJX6pCDgtMRwjoC+X4lv9dyLH+zldaUeN54xdgQQt3M\nIT/P97K56Y+zUsUthr8IGioj+wKBgQC8l1JFjwRXSyLtF13lm3WPzk1DxUxIItOT\nTdOsw0i/pfMnhPo2fBHMiZyE+exv/ktXedxGMSy3tsXs41TJHDlH9HjXspJqM/pE\nGio/CO2tzCcZoFsj6W/zW5B3AP8vt0RV8CLd1S0m7Kdrwvi6skNni2lIovbrhsd7\n6PhSHN6fZwKBgQCnJlWzCextBvUjMBO9ZyQ2vN60rjpApiJTgy7fj7b7J9j19Azp\nWKVf8a54TaM2X4BHvgkbunLWTegNr+QNbMgiShBytrxrfCgSp7rQSxmXcfOZlu0x\n74vu69+RnXKyoMIV/CHyrrI/EFLqwi9m5nLnZYTunifYGdNk4QrEi/SPvwKBgC0g\ngH1IhZ9lyUu2Za+FjZIFqZNn6KLyQnJjEx2p9QR270Irnbvf4FpzK1LeguchkGG0\nNTNOnQaw45eVpjohWMuRAkGK52ImYeJd6HIA7u7BhTGqn2RufW1cIat4P5fpYJ63\nwYAXfKBtzHoKw33ZHivuvhi1diRRsfZCfvkXE2ZNAoGABpFCUz5s/UoRK3siFGtu\nC/cKDdQsgiXO8aW1jV4AbM/9I4sAWNN6F2QmxVjKuMIG/E7CujQaqscYAP2Sm9hK\nn2rCGxM3stu/C/VS1fz7LTqu55508uZJva4lDRbEAoz4MEP3t4Et6OLJyZ02zjih\niQgrkQmn4V1A1IJmalrRIFk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "dialogflow-demo@mapappandroid-393509.iam.gserviceaccount.com",
+  "client_id": "102613454416556509354",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dialogflow-demo%40mapappandroid-393509.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
